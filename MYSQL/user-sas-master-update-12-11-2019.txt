@@ -1,0 +1,5 @@
+UPDATE `users` SET `sys_code`=NULL WHERE 1;
+ALTER TABLE `users`
+	ADD COLUMN `is_hash` TINYINT NULL DEFAULT '0' AFTER `modified_by`;
+ALTER TABLE `users`
+	ADD COLUMN `is_sync` TINYINT(4) NULL DEFAULT '0' AFTER `is_hash`;

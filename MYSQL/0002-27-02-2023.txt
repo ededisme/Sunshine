@@ -1,0 +1,48 @@
+
+INSERT INTO module_types (name, ordering, status) VALUES
+('Referrals', 917, 1);
+
+INSERT INTO modules (module_type_id, name, ordering, status) VALUES
+((SELECT id FROM module_types WHERE name = 'Referrals' LIMIT 1), 'Referrals (Add)', 1, 1),
+((SELECT id FROM module_types WHERE name = 'Referrals' LIMIT 1), 'Referrals (Edit)', 2, 1),
+((SELECT id FROM module_types WHERE name = 'Referrals' LIMIT 1), 'Referrals (View)', 3, 1),
+((SELECT id FROM module_types WHERE name = 'Referrals' LIMIT 1), 'Referrals (Print)', 4, 1),
+((SELECT id FROM module_types WHERE name = 'Referrals' LIMIT 1), 'Referrals (Delete)', 5, 1),
+((SELECT id FROM module_types WHERE name = 'Referrals' LIMIT 1), 'Referrals (Export Excel)', 6, 1);
+
+INSERT INTO module_details(module_id, controllers, views ) VALUES 
+((SELECT id FROM modules WHERE name = 'Referrals (View)' LIMIT 1),'referrals','index'),
+((SELECT id FROM modules WHERE name = 'Referrals (View)' LIMIT 1),'referrals','ajax'),
+((SELECT id FROM modules WHERE name = 'Referrals (Add)' LIMIT 1),'referrals','add'),
+((SELECT id FROM modules WHERE name = 'Referrals (Edit)' LIMIT 1),'referrals','edit'),
+((SELECT id FROM modules WHERE name = 'Referrals (View)' LIMIT 1),'referrals','view'),
+((SELECT id FROM modules WHERE name = 'Referrals (Print)' LIMIT 1),'referrals','print'),
+((SELECT id FROM modules WHERE name = 'Referrals (Delete)' LIMIT 1),'referrals','delete'),
+((SELECT id FROM modules WHERE name = 'Referrals (Export Excel)' LIMIT 1),'referrals','exportExcel');
+
+INSERT INTO modules (module_type_id, name, ordering, status) VALUES
+((SELECT id FROM module_types WHERE name = 'Report' LIMIT 1), 'Report (Referral)', 907, 1);
+
+INSERT INTO module_details(module_id, controllers, views ) VALUES 
+((SELECT id FROM modules WHERE name = 'Report (Referral)' LIMIT 1), 'reports','serviceReferral'),
+((SELECT id FROM modules WHERE name = 'Report (Referral)' LIMIT 1), 'reports','serviceReferralResult'),
+((SELECT id FROM modules WHERE name = 'Report (Referral)' LIMIT 1), 'reports','serviceReferralAjax');
+
+CREATE TABLE IF NOT EXISTS `referrals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `sex` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telephone` varchar(255) COLLATE utf8_unicode_ci DEFAULT '0',
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `description` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `is_active` tinyint(4) DEFAULT '1' COMMENT '1:active 2:edit 3:delete',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+

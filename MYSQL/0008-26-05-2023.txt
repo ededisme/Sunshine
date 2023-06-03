@@ -1,0 +1,10 @@
+
+INSERT INTO modules (module_type_id, name, ordering, status) VALUES
+((SELECT id FROM module_types WHERE name = 'Purchase Bill' LIMIT 1), 'Purchase Bill (Show Unit Cost)', 11, 1);
+
+INSERT INTO module_details(module_id, controllers, views ) VALUES 
+((SELECT id FROM modules WHERE name = 'Purchase Bill (Show Unit Cost)' LIMIT 1),'purchase_orders','showUnitCost');
+
+ALTER TABLE `patient_leaves` CHANGE `doctor_nme` `doctor_nme` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `patient_leaves` CHANGE `diagnotist_after` `diagnotist_after` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `patient_leaves` CHANGE `note` `note` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL;

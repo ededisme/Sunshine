@@ -1,0 +1,25 @@
+
+INSERT INTO module_details(module_id, controllers, views ) VALUES 
+((SELECT id FROM modules WHERE name = 'Patient IPD (view-admission)' LIMIT 1),'patient_ipds','tabDailyClinical');
+
+
+INSERT INTO module_details(module_id, controllers, views ) VALUES 
+((SELECT id FROM modules WHERE name = 'Patient IPD (view-admission)' LIMIT 1),'patient_ipds','tabAttachFile');
+
+
+INSERT INTO module_details(module_id, controllers, views ) VALUES 
+((SELECT id FROM modules WHERE name = 'Patient IPD (view-admission)' LIMIT 1),'patient_ipds','deleteImageAttachFile');
+
+
+CREATE TABLE IF NOT EXISTS `patient_documents` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) DEFAULT NULL,
+  `src_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `extension` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `modified_by` int(11) DEFAULT NULL,
+  `is_active` tinyint(4) DEFAULT '1' COMMENT '1:activ 2:delete',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

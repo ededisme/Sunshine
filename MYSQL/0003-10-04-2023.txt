@@ -1,0 +1,4 @@
+ALTER TABLE `patients` ADD `father_occupation` VARCHAR(50) NULL DEFAULT NULL AFTER `occupation`, ADD `mother_occupation` VARCHAR(50) NULL DEFAULT NULL AFTER `father_occupation`;
+
+INSERT INTO module_details(module_id, controllers, views ) VALUES 
+((SELECT id FROM modules WHERE name = 'Patient IPD (view-admission)' LIMIT 1), 'patient_ipds','printPatientLeave');

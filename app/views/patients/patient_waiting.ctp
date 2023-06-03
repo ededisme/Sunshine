@@ -1,0 +1,1 @@
+<?php echo $this->element('queue_patient_waiting');?>
