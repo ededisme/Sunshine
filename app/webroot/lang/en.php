@@ -2007,4 +2007,6 @@ define('TABLE_DOCTOR_ADVICE', 'Doctor Advice');
 define('TABLE_PATIENT_OCCUPATION','Patient\'s Occupation');
 define('TABLE_FATHER_OCCUPATION','Father\'s Occupation');
 define('TABLE_MOTHER_OCCUPATION','Mother\'s Occupation');
+define('PATIENT_REGISTER','Register Date');
+
 ?>

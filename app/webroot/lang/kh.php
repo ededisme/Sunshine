@@ -1997,4 +1997,5 @@ define('TABLE_DOCTOR_ADVICE', 'ដំបូន្មានរបស់គ្រ�
 define('TABLE_PATIENT_OCCUPATION','មុខរបរ');
 define('TABLE_FATHER_OCCUPATION','មុខរបរ');
 define('TABLE_MOTHER_OCCUPATION','មុខរបរ');
+define('PATIENT_REGISTER','ថ្ងៃ ចុះឈ្មោះ');
 ?>

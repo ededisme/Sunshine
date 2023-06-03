@@ -3,7 +3,7 @@
 class PatientsController extends AppController {
 
     var $name = 'Patients';
-    var $components = array('Helper');
+    var $components = array('Helper', 'Address');
 
     function opdList() {
         $this->layout = "ajax";
@@ -387,12 +387,6 @@ class PatientsController extends AppController {
                 if ($this->Patient->save($this->data)) {
                     $patientId = $this->Patient->getLastInsertId();
 
-//Insert Service Secondary					
-					$patientSsId = ""; 
-					echo("INSERT INTO ".DB_SS_MONY_KID."patients (`id`, `patient_code`, `patient_name`, `mother_name`, `father_name`, `sex`, `telephone`, `address`, `location_id`, `relation_patient`, `patient_id_card`, `email`, `dob`, `nationality`, `religion`, `patient_bill_type_id`, `company_insurance_id`, `insurance_note`, `occupation`, `patient_fax_number`, `case_emergency_tel`, `case_emergency_name`, `allergic_medicine`, `allergic_food`, `allergic_medicine_note`, `allergic_food_note`, `patient_type_id`, `patient_group_id`, `patient_group`, `payment_term_id`, `payment_every`, `photo`, `created`, `created_by`, `modified`, `modified_by`, `is_active`) 
-                                            SELECT `id`, `patient_code`, `patient_name`, `mother_name`, `father_name`, `sex`, `telephone`, `address`, `location_id`, `relation_patient`, `patient_id_card`, `email`, `dob`, `nationality`, `religion`, `patient_bill_type_id`, `company_insurance_id`, `insurance_note`, `occupation`, `patient_fax_number`, `case_emergency_tel`, `case_emergency_name`, `allergic_medicine`, `allergic_food`, `allergic_medicine_note`, `allergic_food_note`, `patient_type_id`, `patient_group_id`, `patient_group`, `payment_term_id`, `payment_every`, `photo`, `created`, `created_by`, `modified`, `modified_by`, `is_active` FROM patients WHERE id = " . $patientId . ";");
-                	$patientSsId = mysql_insert_id();
-
                     if(isset($this->data['Patient']['patient_conection_id'])){
                         for ($i = 0; $i < sizeof($this->data['Patient']['patient_conection_id']); $i++) {
                             if($this->data['Patient']['patient_conection_id'][$i]!=""){
@@ -400,9 +394,6 @@ class PatientsController extends AppController {
                                 $data['PatientConnectionDetail']['patient_id'] = $patientId;
                                 $data['PatientConnectionDetail']['patient_connection_with_hospital_id'] = $this->data['Patient']['patient_conection_id'][$i];
                                 $this->PatientConnectionDetail->save($data['PatientConnectionDetail']);
-								// Secondary
-								mysql_query("INSERT INTO ".DB_SS_MONY_KID."patient_connection_details (`id`, `patient_id`, `patient_connection_with_hospital_id`, `created`, `modified`, `status`) 
-								 			SELECT `id`, `patient_id`, `patient_connection_with_hospital_id`, `created`, `modified`, `status` FROM patients WHERE id = " . $patientId . ";");
 							}                        
                         }         
                     }
@@ -491,8 +482,12 @@ class PatientsController extends AppController {
                             )
                         )
                 )));
+            $provinces = ClassRegistry::init('Province')->find('list', array('conditions' => array('is_active != 2')));
+            $districts = $this->Address->districtList();
+            $communes  = $this->Address->communeList();
+            $villages   = $this->Address->villageList();
         $this->set('code', '');
-        $this->set(compact('sexes', 'patientTypes', 'patientBillTypes', 'patientGroups', 'nationalities', 'locations', 'patientConnections', 'doctors', 'companyInsurances','referrals'));
+        $this->set(compact('sexes', 'patientTypes', 'patientBillTypes', 'patientGroups', 'nationalities', 'locations', 'patientConnections', 'doctors', 'companyInsurances', 'referrals', 'provinces', 'districts', 'communes', 'villages'));
     }
 
     
@@ -526,28 +521,19 @@ class PatientsController extends AppController {
             if ($this->Patient->save($this->data)) {                                        
                 $patientId = $this->data['Patient']['id'];   
 
-				//Update Service Secondary		
-				mysql_query("DELETE FROM ".DB_SS_MONY_KID."patients WHERE id={$patientId}");
-				$insertPatient = mysql_query("INSERT INTO ".DB_SS_MONY_KID."patients (`id`, `patient_code`, `patient_name`, `mother_name`, `father_name`, `sex`, `telephone`, `address`, `location_id`, `relation_patient`, `patient_id_card`, `email`, `dob`, `nationality`, `religion`, `patient_bill_type_id`, `company_insurance_id`, `insurance_note`, `occupation`, `patient_fax_number`, `case_emergency_tel`, `case_emergency_name`, `allergic_medicine`, `allergic_food`, `allergic_medicine_note`, `allergic_food_note`, `patient_type_id`, `patient_group_id`, `patient_group`, `payment_term_id`, `payment_every`, `photo`, `referral_id`,`created`, `created_by`, `modified`, `modified_by`, `is_active`) 
-										SELECT `id`, `patient_code`, `patient_name`, `mother_name`, `father_name`, `sex`, `telephone`, `address`, `location_id`, `relation_patient`, `patient_id_card`, `email`, `dob`, `nationality`, `religion`, `patient_bill_type_id`, `company_insurance_id`, `insurance_note`, `occupation`, `patient_fax_number`, `case_emergency_tel`, `case_emergency_name`, `allergic_medicine`, `allergic_food`, `allergic_medicine_note`, `allergic_food_note`, `patient_type_id`, `patient_group_id`, `patient_group`, `payment_term_id`, `payment_every`, `photo`,`referral_id` `created`, `created_by`, `modified`, `modified_by`, `is_active` FROM patients WHERE id = " . $patientId . ";");
 
 
 				$this->PatientConnectionDetail->updateAll(
                     array('PatientConnectionDetail.status' => "2"), array('PatientConnectionDetail.patient_id' => $patientId)
                 );
                 if(isset($this->data['Patient']['patient_conection_id'])){
-					// update secondary
-					mysql_query("UPDATE ".DB_SS_MONY_KID."patient_connection_details SET status = 2 WHERE patient_id={$patientId}");
                     for ($i = 0; $i < sizeof($this->data['Patient']['patient_conection_id']); $i++) {
                         if($this->data['Patient']['patient_conection_id'][$i]!=""){
                             $this->PatientConnectionDetail->create();
                             $data['PatientConnectionDetail']['patient_id'] = $patientId;
                             $data['PatientConnectionDetail']['patient_connection_with_hospital_id'] = $this->data['Patient']['patient_conection_id'][$i];
                             $this->PatientConnectionDetail->save($data['PatientConnectionDetail']);
-                       
-					   		// Secondary
-							mysql_query("INSERT INTO ".DB_SS_MONY_KID."patient_connection_details (`id`, `patient_id`, `patient_connection_with_hospital_id`, `created`, `modified`, `status`) 
-								 		SELECT `id`, `patient_id`, `patient_connection_with_hospital_id`, `created`, `modified`, `status` FROM patient_connection_details WHERE status = 1 AND patient_id = " . $patientId . ";");
+
 					    }                        
                     }       
                 }

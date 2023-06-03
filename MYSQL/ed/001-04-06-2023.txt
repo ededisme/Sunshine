@@ -1,0 +1,3 @@
+ALTER TABLE `patients` ADD `register_date` DATE NULL DEFAULT NULL AFTER `referral_id`;
+
+ALTER TABLE `patients` ADD `province_id` INT(11) NULL DEFAULT NULL AFTER `location_id`, ADD `district_id` INT(11) NULL DEFAULT NULL AFTER `province_id`, ADD `commune_id` INT(11) NULL DEFAULT NULL AFTER `district_id`, ADD `village_id` INT(11) NULL DEFAULT NULL AFTER `commune_id`;
