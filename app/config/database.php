@@ -81,7 +81,7 @@ class DATABASE_CONFIG
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => '000_sunshine',
+		'database' => 'sunshine_db',
 		'prefix' => '',
 			'encoding' => 'utf8',
 	);

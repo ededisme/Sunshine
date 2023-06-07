@@ -149,8 +149,13 @@ class PatientsController extends AppController {
                 )
         )));                
         $patientConnections = ClassRegistry::init('PatientConnectionWithHospital')->find('all');
-        $patientConnectionDetails = ClassRegistry::init('PatientConnectionDetail')->find('list', array('fields' => 'id,patient_connection_with_hospital_id', 'conditions' => array('status'=>1, 'patient_id' => $id)));        
-        $this->set(compact('patient', 'patientConnections', 'patientConnectionDetails'));
+        $patientConnectionDetails = ClassRegistry::init('PatientConnectionDetail')->find('list', array('fields' => 'id, patient_connection_with_hospital_id', 'conditions' => array('status'=>1, 'patient_id' => $id)));   
+        $referrals = ClassRegistry::init('Referral')->find('list', array('conditions' => 'is_active=1'));
+        $provinces = ClassRegistry::init('Province')->find('list', array('conditions' => array('is_active != 2')));
+        $districts = $this->Address->districtList();
+        $communes  = $this->Address->communeList();
+        $villages   = $this->Address->villageList();
+        $this->set(compact('patient', 'patientConnections', 'patientConnectionDetails', 'referrals', 'provinces', 'districts', 'communes', 'villages'));
     }
     
     function printPatientForm($id = null) {
@@ -558,7 +563,11 @@ class PatientsController extends AppController {
         $this->set('code', $this->data['Patient']['patient_code']);
         $companyInsurances = ClassRegistry::init('CompanyInsurance')->find('list', array('conditions' => 'is_active=1'));
         $referrals = ClassRegistry::init('Referral')->find('list', array('conditions' => 'is_active=1'));
-        $this->set(compact('sexes', 'patientTypes', 'patientBillTypes', 'patientGroups', 'nationalities', 'locations', 'patientConnections', 'patientConnectionDetails', 'companyInsurances','referrals'));
+        $provinces = ClassRegistry::init('Province')->find('list', array('conditions' => array('is_active != 2')));
+        $districts = $this->Address->districtList();
+        $communes  = $this->Address->communeList();
+        $villages   = $this->Address->villageList();
+        $this->set(compact('sexes', 'patientTypes', 'patientBillTypes', 'patientGroups', 'nationalities', 'locations', 'patientConnections', 'patientConnectionDetails', 'companyInsurances', 'referrals', 'provinces', 'districts', 'communes', 'villages'));
     }
     
     function delete($id = null) {

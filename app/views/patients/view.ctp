@@ -28,8 +28,10 @@
     <legend style="background: #EDEDED; font-weight: bold;"><?php __(MENU_PATIENT_MANAGEMENT_INFO); ?></legend>
     <table style="width: 100% !important;" class="info">
         <tr>
-            <th style="width: 15%;"><?php __(PATIENT_CODE); ?></th>
+            <th style="width: 10%;"><?php __(PATIENT_CODE); ?></th>
             <td style="width: 25%;">: <?php echo $patient['Patient']['patient_code']; ?></td>
+            <th style="width: 10%;"><?php __(PATIENT_REGISTER); ?></th>
+            <td style="width: 25%;">: <?php echo date("d/m/Y", strtotime($patient['Patient']['register_date'])); ?></td>
         </tr>
         <tr>
             <th><?php __(PATIENT_NAME); ?></th>
@@ -54,8 +56,17 @@
             <td>: <?php echo $patient['Patient']['telephone']; ?></td>
         </tr>
         <tr>
-            <th><?php __(TABLE_ADDRESS); ?></th>
-            <td>: <?php echo $patient['Patient']['address']; ?></td>
+            <th><?php __(TABLE_REFERRAL); ?></th>
+            <td>: 
+                <?php 
+                    if ($patient['Patient']['referral_id'] != "") {
+                    $queryReferral = mysql_query("SELECT name FROM referrals WHERE id=" . $patient['Patient']['referral_id']);
+                    while ($row = mysql_fetch_array($queryReferral)) {
+                        echo $row['name'];
+                    }
+                } 
+                ?>
+            </td>
             <th><?php __(TABLE_NATIONALITY); ?></th>
             <td>:
                 <?php
@@ -75,51 +86,67 @@
             </td>
         </tr>
         <tr>
-            <th><?php __(TABLE_PATIENT_OCCUPATION); ?></th>
-            <td>: <?php echo $patient['Patient']['occupation']; ?></td>
+            <th><?php __(TABLE_FATHER_NAME); ?></th>
+            <td>: <?php echo $patient['Patient']['father_name']; ?></td>
+            <th><?php __(TABLE_MOTHER_NAME); ?></th>
+            <td>: <?php echo $patient['Patient']['mother_name']; ?></td>
+        </tr>
+        <?php 
+            $display = 'display : none';
+            if ($patient['Patient']['province_id'] != ""){
+                $display = '';
+            }
+        ?>
+        <tr style="<?php echo $display; ?>">
+            <th><?php __(TABLE_ADDRESS); ?></th>
+            <td>: 
+                <?php 
+                    if ($patient['Patient']['village_id'] != ""){
+                        $queryVillage = mysql_query("SELECT name FROM communes WHERE id=" . $patient['Patient']['village_id']);
+                        while ($rowVillage = mysql_fetch_array($queryVillage)) {
+                             echo $rowVillage['name'] . ", ";
+                        }
+                    }
+                    if ($patient['Patient']['commune_id'] != ""){
+                        $queryCommune = mysql_query("SELECT name FROM communes WHERE id=" . $patient['Patient']['commune_id']);
+                        while ($rowCommune = mysql_fetch_array($queryCommune)) {
+                             echo $rowCommune['name'] . ", ";
+                        }
+                    }
+                    if ($patient['Patient']['district_id'] != ""){
+                        $queryDistrict = mysql_query("SELECT name FROM districts WHERE id=" . $patient['Patient']['district_id']);
+                        while ($rowDistrict = mysql_fetch_array($queryDistrict)) {
+                             echo $rowDistrict['name'] . ", ";
+                        }
+                    }
+                    if ($patient['Patient']['province_id'] != ""){
+                        $queryProvince = mysql_query("SELECT name FROM provinces WHERE id=" . $patient['Patient']['province_id']);
+                        while ($rowProvince = mysql_fetch_array($queryProvince)) {
+                            echo $rowProvince['name'];
+                        }
+                    }
+                ?>
+            </td>
+        </tr>
+        <?php 
+            $displayAllergic = '';
+            if ($patient['Patient']['unknown_allergic'] == 1){
+                $displayAllergic = 'display : none';
+            }
+        ?>
+        <tr style="<?php echo $displayAllergic; ?>">
             <th><?php __(TABLE_PATIENT_STATUS); ?></th>
-            <!-- <td>:
-                <input <?php if ($patient['Patient']['allergic_medicine'] != 0) {
-                            echo 'checked="true"';
-                        } ?> disabled="true" type="checkbox" id="PatientAllergicMedicine" />
-                <label style="padding-right: 20px;" for="PatientAllergicMedicine"><?php echo TABLE_ALLERGIC; ?></label>
+            <td>:
+                <input <?php if($patient['Patient']['allergic_medicine']!=0){ echo 'checked="true"';}?>  disabled="true" type="checkbox"/>
+                <label for="PatientAllergicFood" style="font-weight: bold; color: red;"><?php echo TABLE_ALLERGIC_FOOD; ?></label>
                 <?php
-                echo '<div style="margin-left: 25px; margin-top: 10px;  font-weight: bold;"> NOTE : ';
+                echo '<div style="margin-left: 25px; margin-top: 10px; color: red"> NOTE : ';
                 if ($patient['Patient']['allergic_medicine_note'] != "") {
                     echo nl2br($patient['Patient']['allergic_medicine_note']);
                 }
                 echo '</div>';
                 ?>
-            </td> -->
-            <td>:
-                <input style="" <?php if ($patient['Patient']['allergic_medicine'] != 0) {
-                                    echo 'checked="true"';
-                                } ?> disabled="true" type="checkbox" />
-                <label style="padding-right: 20px;"><?php echo TABLE_ALLERGIC; ?></label>
-                <?php if ($_SESSION['lang'] == "kh") {
-                    echo '<br/>';
-                } ?>
-                <input <?php if ($patient['Patient']['unknown_allergic'] != 0) {
-                            echo 'checked="true"';
-                        } ?> disabled="true" type="checkbox" />
-                <label><?php echo TABLE_UNKNOWN_ALLERGIC; ?></label>
             </td>
-        </tr>
-        <tr>
-            <th><?php __(TABLE_FATHER_NAME); ?></th>
-            <td>: <?php echo $patient['Patient']['father_name']; ?></td>
-            <th><?php __(TABLE_FATHER_OCCUPATION); ?></th>
-            <td>: <?php echo $patient['Patient']['father_occupation']; ?></td>
-        </tr>
-        <tr>
-            <th><?php __(TABLE_MOTHER_NAME); ?></th>
-            <td>: <?php echo $patient['Patient']['mother_name']; ?></td>
-            <th><?php __(TABLE_MOTHER_OCCUPATION); ?></th>
-            <td>: <?php echo $patient['Patient']['mother_occupation']; ?></td>
-        </tr>
-        <tr>
-            <th><?php __(TABLE_REFERRAL); ?></th>
-            <td colspan="3">: <?php echo $patient['Referral']['name']; ?></td>
         </tr>
     </table>
     <br />

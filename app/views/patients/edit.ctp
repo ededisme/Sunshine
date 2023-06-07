@@ -1,5 +1,6 @@
 <?php 
 echo $this->element('prevent_multiple_submit');
+$absolute_url = FULL_BASE_URL . Router::url("/", false);
 echo $javascript->link('uninums.min'); 
 ?>
 <style type="text/css">
@@ -24,6 +25,9 @@ echo $javascript->link('uninums.min');
             beforeSubmit: function(arr, $form, options) {
                 $(".txtSavePatient").html("<?php echo ACTION_LOADING; ?>");
                 $(".loader").attr("src", "<?php echo $this->webroot; ?>img/layout/spinner.gif");
+            },
+            beforeSerialize: function($form, options) {
+                $("#PatientRegisterDate").datepicker("option", "dateFormat", "yy-mm-dd");
             },
             success: function(result) {
                 $(".loader").attr("src", "<?php echo $this->webroot; ?>img/layout/spinner-placeholder.gif"); 
@@ -167,7 +171,101 @@ echo $javascript->link('uninums.min');
             var leftPanel=rightPanel.parent().find(".leftPanel");
             rightPanel.hide();rightPanel.html("");
             leftPanel.show("slide", { direction: "left" }, 500);
-        });                
+        });     
+        
+        $("#PatientRegisterDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yy',
+            maxDate: 0
+        }).unbind("blur");
+
+        // Action Address
+        // Province
+        // $(".province").click(function(){
+        //     if($(this).val()!=""){
+        //         $(".district").val('');
+        //         $(".district option[class!='']").hide();
+        //         $(".district option[class='"  + $(this).val() + "']").show();
+        //     }else{
+        //         $(".district").val('');
+        //         $(".commune").val('');
+        //         $(".village").val('');
+        //         $(".district option").show();
+        //         $(".commune option").show();
+        //         $(".village option").show();
+        //     }
+        //     comboRefesh(".district",".province");
+        // });
+        // // District
+        // $(".district").change(function(){
+        //     if($(this).val()!=""){
+        //         $(".province").val($(".district").find("option:selected").attr("class"));
+        //         $(".commune").val('');
+        //         $(".commune option[class!='']").hide();
+        //         $(".commune option[class='"  + $(this).val() + "']").show();
+        //     }else{
+        //         $(".commune").val('');
+        //         $(".village").val('');
+        //         $(".commune option").show();
+        //         $(".village option").show();
+        //     }
+        //     comboRefesh(".commune",".district");
+        // });
+        // // Commune
+        // $(".commune").change(function(){
+        //     if($(this).val()!=""){
+        //         $(".village").val('');
+        //         $(".village option[class!='']").hide();
+        //         $(".village option[class='"  + $(this).val() + "']").show();
+        //     }else{
+        //         $(".village").val('');
+        //         $(".village option").show();
+        //     }
+        // });
+
+
+        $("#PatientProvinceId").click(function(){
+            if($(this).val()!=""){
+                $("#PatientDistrictId").val('');
+                $("#PatientDistrictId option[class!='']").hide();
+                $("#PatientDistrictId option[class='"  + $(this).val() + "']").show();
+            }else{
+                $("#PatientDistrictId").val('');
+                $("#PatientCommuneId").val('');
+                $("#PatientVillageId").val('');
+                $("#PatientDistrictId option").show();
+                $("#PatientCommuneId option").show();
+                $("#PatientVillageId option").show();
+            }
+            comboRefesh("#PatientDistrictId","#PatientProvinceId");
+        });
+        // District
+        $("#PatientDistrictId").change(function(){
+            if($(this).val()!=""){
+                $("#PatientProvinceId").val($("#PatientDistrictId").find("option:selected").attr("class"));
+                $("#PatientCommuneId").val('');
+                $("#PatientCommuneId option[class!='']").hide();
+                $("#PatientCommuneId option[class='"  + $(this).val() + "']").show();
+            }else{
+                $("#PatientCommuneId").val('');
+                $("#PatientVillageId").val('');
+                $("#PatientCommuneId option").show();
+                $("#PatientVillageId option").show();
+            }
+            comboRefesh("#PatientCommuneId","#PatientDistrictId");
+        });
+        // Commune
+        $("#PatientCommuneId").change(function(){
+            if($(this).val()!=""){
+                $("#PatientVillageId").val('');
+                $("#PatientVillageId option[class!='']").hide();
+                $("#PatientVillageId option[class='"  + $(this).val() + "']").show();
+            }else{
+                $("#PatientVillageId").val('');
+                $("#PatientVillageId option").show();
+            }
+        });
     }); 
     
     function getAgePatient(dob = null){            
@@ -333,69 +431,146 @@ $month = '';
     <table style="margin-left: 10px; width: 97%; border-spacing: 0em 0.2em; border-collapse: separate;" cellspacing="2" cellpadding="2">
         <tr>
             <td style="width: 10%;"><?php echo PATIENT_CODE; ?> <span class="red">*</span> :</td>
-            <td style="width: 30%;">                
+            <td style="width: 35%;">                
                 <?php echo $code; ?>
                 <input name="data[Patient][patient_code]" type="hidden" value="<?php echo $code;?>"/>
                 <input name="data[Patient][patient_group]" type="hidden" value="1"/>
             </td>
-            <td style="width: 7%;"> </td>
-            <td style="width: 15%;display: none;"><label for="PatientReligion"><?php echo TABLE_RELIGION; ?> :</label></td>
-            <td style="width: 30%;display: none;"><?php echo $this->Form->text('religion'); ?></td>
+            <td style="width: 6%;"></td>
+            <td style="width: 10%;"></td>
+            <td style="width: 30%;"></td>
         </tr>
         <tr>
-            <td><label for="PatientPatientName"><?php echo PATIENT_NAME; ?> <span class="red">*</span> :</label></td>
-            <td><?php echo $this->Form->text('patient_name', array('class' => 'validate[required]')); ?></td>
+        <td style="width: 10%;"><?php echo PATIENT_REGISTER; ?> <span class="red">*</span> :</td>
+            <td style="width: 35%;">
+                <?php echo $this->Form->text('register_date', array('value' => date("d/m/Y"), 'label' => false, 'class' => 'validate[required]', 'readonly' => true, 'style' => 'width: 283px')); ?>
+            </td>
             <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><label for="PatientName"><?php echo PATIENT_NAME; ?> <span class="red">*</span> :</label></td>
+            <td><?php echo $this->Form->text('patient_name', array('class' => 'validate[required]')); ?></td>
+            <td> </td>
             <td><label for="PatientSex"><?php echo TABLE_SEX; ?> <span class="red">*</span> :</label></td>
-            <td><?php echo $this->Form->input('sex', array('empty' => SELECT_OPTION, 'label' => false, 'class' => 'validate[required]', 'style' => 'width: 410px;')); ?></td>
-        </tr> 
+            <td><?php echo $this->Form->input('sex', array('empty' => SELECT_OPTION, 'label' => false, 'class' => 'validate[required]', 'style' => 'width: 200px;')); ?></td>
+        </tr>
         <tr>
             <td><label for="PatientDob"><?php echo TABLE_DOB; ?> <span class="red">*</span> :</label></td>
-            <td>                
-                <?php echo $this->Form->text('dob', array('style'=>'width: 25%;', 'readonly' => true, 'class' => 'validate[required]','onkeypress'=>'return isNumberKey(event)')); ?>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <label for="PatientAge" style="margin-left: 5px;"><?php echo TABLE_AGE; ?>:</label>
-                <?php echo $this->Form->text('age',array('style'=>'width: 39px;', 'class' => 'number validate[required]', 'value' => $age, 'maxlength' => '3', 'autocomplete' => false)); ?>
-                &nbsp;&nbsp;&nbsp;
-                <?php echo TABLE_AGE_MONTH;?>
-                <?php echo $this->Form->text('age_month',array('style'=>'width:30px;', 'readonly'=>'readonly','disabled'=> true, 'value'=>$month)); ?> 
-                &nbsp;&nbsp;
-                <?php echo TABLE_AGE_DAY;?>
-                <?php echo $this->Form->text('age_day',array('style'=>'width:30px;', 'readonly'=>'readonly', 'disabled'=> true, 'value'=>$day)); ?>    
-            </td>
-            <td></td>
-            <td><label for="PatientTelephone"><?php echo TABLE_TELEPHONE; ?>:</label> <span class="red">*</span> :</label></td>
             <td>
-                <?php echo $this->Form->text('telephone', array('class' => 'validate[required,custom[phone]]')); ?>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="PatientAddress"><?php echo TABLE_ADDRESS; ?> :</label></td>
-            <td><?php echo $this->Form->text('address'); ?></td>
-            <td> </td>
+                <?php echo $this->Form->text('dob', array('style'=>'width: 13%;', 'readonly' => true, 'class' => 'validate[required]','onkeypress'=>'return isNumberKey(event)')); ?>
+                &nbsp;
+                <label for="PatientAge" style="margin-left: 2px;"><?php echo TABLE_AGE; ?>:</label>
+                <?php echo $this->Form->text('age',array('style'=>'width: 20px;', 'class' => 'number validate[required]', 'maxlength' => '3')); ?>
+                &nbsp;
+                <?php echo TABLE_AGE_MONTH;?>
+                <?php echo $this->Form->text('age_month',array('style'=>'width:20px;', 'readonly'=>'readonly','disabled'=> true)); ?>
+                &nbsp;
+                <?php echo TABLE_AGE_DAY;?>
+                <?php echo $this->Form->text('age_day',array('style'=>'width:20px;', 'readonly'=>'readonly', 'disabled'=> true)); ?>
+            <td></td>
             <td><label for="PatientNationality"><?php echo TABLE_NATIONALITY; ?> :</td>
             <td>
-                <?php echo $this->Form->input('patient_group_id', array('empty' => SELECT_OPTION, 'label' => false, 'default' => '1', 'class' => 'validate[required]', 'style' => 'width: 200px;')); ?>                
-                <?php echo $this->Form->input('nationality', array('empty' => SELECT_OPTION, 'label' => false,'class' => 'validate[required]', 'style' => 'width: 210px; display:none;')); ?>
+                <?php echo $this->Form->input('patient_group_id', array('empty' => SELECT_OPTION, 'label' => false, 'default' => '1', 'class' => 'validate[required]', 'style' => 'width: 200px;')); ?>
+                &nbsp;&nbsp;
+                <?php echo $this->Form->input('nationality', array('empty' => SELECT_OPTION, 'label' => false,'class' => 'validate[required]', 'style' => 'width: 200px; display:none;')); ?>
             </td>
         </tr>
         <tr>
-            <td><label for="PatientOccupation"><?php echo TABLE_PATIENT_OCCUPATION; ?> :</label></td>
+            <td><label for="PatientTelephone"><?php echo TABLE_TELEPHONE; ?>: </label> <span class="red">*</span> :</label></td>
+            <td><?php echo $this->Form->text('telephone', array('class' => 'validate[required,custom[phone]]')); ?></td>
+            <td></td>
+            <td><label for="PatientTypeID"><?php echo PATIENT_TYPE; ?> :</label></td>
             <td>
-                <select style="width: 410px;" name="data[Patient][occupation]">
-                    <option value=""><?php echo INPUT_SELECT; ?></option>
-                    <option value="ទារក"><?php echo "ទារក"; ?></option>
-                    <option value="កុមារ"><?php echo "កុមារ"; ?></option>
-                    <option value="សិស្ស"><?php echo "សិស្ស"; ?></option>
+                <?php echo $this->Form->input('patient_type_id', array('empty' => SELECT_OPTION, 'default'=> '2', 'label' => false, 'style' => 'width: 200px;')); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="father_name"><?php echo TABLE_FATHER_NAME; ?> :</label></td>
+            <td><?php echo $this->Form->text('father_name'); ?></td>
+            <td></td>
+            <td><label for=""><?php echo TABLE_REFERRAL; ?> :</label></td>
+            <td><?php echo $this->Form->input('referral_id', array('empty' => SELECT_OPTION, 'label' => false, 'style' => 'width: 200px;')); ?>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="mother_name"><?php echo TABLE_MOTHER_NAME; ?> :</label></td>
+            <td><?php echo $this->Form->text('mother_name'); ?></td>
+            <td></td>
+            <td><label for="PatientDoctorId"><?php echo DOCTOR_DOCTOR; ?> :</label></td>
+            <td>
+                <select id="PatientDoctorId" name="data[Patient][doctor_id]">
+                    <option value=""><?php echo SELECT_OPTION;?></option>
+                    <?php 
+                        foreach ($doctors as $doctor) {
+                            echo '<option value="'.$doctor['User']['id'].'">'.$doctor['Employee']['name'].'</option>';
+                        }
+                    ?>
                 </select>
+            </td>
+        </tr>
+        <tr style='display : none;'>
+            <td><?php echo $this->Form->text('religion'); ?></td>
+            <td><?php echo $this->Form->text('father_occupation'); ?></td>
+            <td><?php echo $this->Form->text('mother_occupation'); ?></td>
+            <td><?php echo $this->Form->text('address'); ?></td>
+            <td><?php echo $this->Form->text('occupation'); ?></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <fieldset>
+                    <legend><?php echo TABLE_ADDRESS; ?> <span class="red">*</span></legend>
+                    <table cellpadding="3" cellspacing="0" style="width: 100%;">
+                        <tr>
+                            <td style="width: 18%;"><label for="PatientProvinceId"><?php echo TABLE_PROVINCE; ?> :
+                                </label></td>
+                            <td style="width: 33%;">
+                                <div class="inputContainer">
+                                    <?php echo $this->Form->input('province_id', array('empty' => INPUT_SELECT, 'class'=>'province', 'label'=>false, 'style' => 'width: 200px;')); ?>
+                                </div>
+                            </td>
+                            <td style="width: 3%;"></td>
+                            <td style="width: 10%;"><label for="EmployeeDistrictId"><?php echo TABLE_DISTRICT; ?> :
+                                </label></td>
+                            <td style="width: 30%;">
+                                <div class="inputContainer">
+                                    <?php echo $this->Form->input('district_id', array('empty' => INPUT_SELECT, 'class'=>'district', 'label'=>false, 'style' => 'width: 200px;')); ?>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="PatientCommuneId"><?php echo TABLE_COMMUNE; ?> : </label></td>
+                            <td>
+                                <div class="inputContainer">
+                                    <?php echo $this->Form->input('commune_id', array('empty' => INPUT_SELECT, 'class'=>'commune', 'label'=>false, 'style' => 'width: 200px;')); ?>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td><label for="PatientVillageId"><?php echo TABLE_VILLAGE; ?> : </label>
+                            </td>
+                            <td>
+                                <div class="inputContainer">
+                                    <?php echo $this->Form->input('village_id', array('empty' => INPUT_SELECT,  'class'=>'village', 'label'=>false, 'style' => 'width: 200px;')); ?>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
             </td>
             <td></td>
             <td><?php echo TABLE_PATIENT_STATUS; ?> :</td>
             <td>
-                <input <?php if($this->data['Patient']['allergic_medicine']!=0){ echo 'checked="true"';}?> name="data[Patient][allergic_medicine]" type="checkbox" id="PatientAllergicMedicine" value=""/>
+                <input name="data[Patient][allergic_medicine]" type="checkbox" id="PatientAllergicMedicine" value="1" />
                 <label style="padding-right: 20px;" for="PatientAllergicMedicine"><?php echo TABLE_ALLERGIC; ?></label>
                 <?php if($_SESSION['lang']=="kh"){ echo '<br/>';}?>
-                <input <?php if($this->data['Patient']['unknown_allergic']!=0){ echo 'checked="true"';}?> name="data[Patient][unknown_allergic]" type="checkbox" id="PatientUnknownAllergic" value=""/>
+                <div style="display: none;">
+                    <input name="data[Patient][allergic_food]" type="checkbox" id="PatientAllergicFood" value="1" />
+                    <label style="padding-right: 20px;"
+                        for="PatientAllergicFood"><?php echo TABLE_ALLERGIC_FOOD; ?></label>
+                    <?php if($_SESSION['lang']=="kh"){ echo '<br/>';}?>
+                </div>
+                <input name="data[Patient][unknown_allergic]" type="checkbox" id="PatientUnknownAllergic" value="1" />
                 <label for="PatientUnknownAllergic"><?php echo TABLE_UNKNOWN_ALLERGIC; ?></label>
             </td>
         </tr>
@@ -406,60 +581,9 @@ $month = '';
             <td></td>
             <td>
                 <div style="float:left; padding-right: 10px;">
-                    <input type="text" id="inpShow" style="width:140px;height:25px;border: none;background-image: none;" readonly="true">
+                    <input type="text" id="inpShow" style="width:140px;height:25px;border: none;background-image: none;"
+                        readonly="true">
                     <?php echo $this->Form->textarea('allergic_medicine_note', array('label' => false, 'style' => 'width:140px;height:25px;display:none;')); ?>
-                </div>
-                <div style="width: 10%;"></div>
-                <div style="float:left; width: 50%;">
-                    <?php echo $this->Form->textarea('allergic_food_note', array('label' => false, 'style' => 'width:140px;height:25px;display:none;')); ?>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="father_name"><?php echo TABLE_FATHER_NAME; ?> :</label></td>
-            <td>
-                <?php echo $this->Form->text('father_name'); ?>
-            </td>
-            <td></td>
-            <td><label for="father_occupation"><?php echo TABLE_FATHER_OCCUPATION; ?> :</label></td>
-            <td>
-                <?php echo $this->Form->text('father_occupation'); ?>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="mother_name"><?php echo TABLE_MOTHER_NAME; ?> :</label></td>
-            <td>
-                <?php echo $this->Form->text('mother_name'); ?>
-            </td>
-            <td></td>
-            <td><label for="mother_occupation"><?php echo TABLE_MOTHER_OCCUPATION; ?> :</label></td>
-            <td>
-                <?php echo $this->Form->text('mother_occupation'); ?>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="PatientDoctorId"><?php echo DOCTOR_DOCTOR; ?> :</label></td>
-                <td>
-                    <select id="PatientDoctorId" name="data[Patient][doctor_id]">
-                        <option value=""><?php echo SELECT_OPTION;?></option>
-                        <?php 
-                        foreach ($doctors as $doctor) {
-                            echo '<option value="'.$doctor['User']['id'].'">'.$doctor['Employee']['name'].'</option>';
-                        }
-                        ?>
-                    </select>
-                </td>
-        </tr>
-        <tr>    
-            <td><label for=""><?php echo TABLE_REFERRAL; ?> :</label></td>
-            <td>      
-                <?php echo $this->Form->input('referral_id', array('empty' => SELECT_OPTION, 'label' => false, 'style' => 'width: 200px;')); ?>
-            </td>
-            <td colspan="2"></td>
-            <td>
-                <div style="float:left; padding-right: 10px;">
-                    <input type="text" id="inpShow" style="width:140px;height:25px;border: none;background-image: none;" readonly="true">
-                    <?php echo $this->Form->textarea('allergic_medicine_note', array('label' => false, 'style' => 'width:265px; height:25px;display:none;')); ?>
                 </div>
                 <div style="width: 10%;"></div>
                 <div style="float:left; width: 50%;">
