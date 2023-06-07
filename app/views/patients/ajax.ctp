@@ -15,7 +15,7 @@ $allowDelete = checkAccess($user['User']['id'], $this->params['controller'], 'de
 /* Array of database columns which should be read and sent back to DataTables. Use a space where
  * you want to insert a non-database field (for example a counter or static image)
  */
-$aColumns = array('id', 'patient_code', 'patient_name', 'sex', 'DATE_FORMAT(dob,"'.MYSQL_DATE.'")', 'dob', 'telephone', 'address', 'DATE_FORMAT(created,"'.MYSQL_DATE.'")');
+$aColumns = array('id', 'patient_code', 'patient_name', 'sex', 'DATE_FORMAT(dob,"'.MYSQL_DATE.'")', 'dob', 'telephone', 'DATE_FORMAT(created,"'.MYSQL_DATE.'")');
 
 /* Indexed column (used for fast and accurate table cardinality) */
 $sIndexColumn = "id";

@@ -268,14 +268,14 @@ $allowAdd = checkAccess($user['User']['id'], $this->params['controller'], 'add')
                     <th><?php echo TABLE_DOB; ?></th>
                     <th><?php echo TABLE_AGE; ?></th>
                     <th><?php echo TABLE_TELEPHONE; ?></th> 
-                    <th><?php echo MENU_ADDRESS; ?></th> 
+                    <!-- <th><?php echo MENU_ADDRESS; ?></th>  -->
                     <th><?php echo TABLE_CREATED; ?></th> 
                     <th><?php echo ACTION_ACTION; ?></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="10" class="first dataTables_empty"><?php echo TABLE_LOADING; ?></td>
+                    <td colspan="9" class="first dataTables_empty"><?php echo TABLE_LOADING; ?></td>
                 </tr>
             </tbody>
         </table>
