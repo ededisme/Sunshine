@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 06:23 AM
+-- Generation Time: Jun 07, 2023 at 10:48 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -681,7 +681,7 @@ CREATE TABLE IF NOT EXISTS `branches` (
 --
 
 INSERT INTO `branches` (`id`, `sys_code`, `company_id`, `branch_type_id`, `name`, `name_other`, `telephone`, `email_address`, `fax_number`, `long`, `lat`, `country_id`, `province_id`, `district_id`, `commune_id`, `village_id`, `address`, `address_other`, `currency_center_id`, `pos_currency_id`, `work_start`, `work_end`, `created`, `created_by`, `modified`, `modified_by`, `act`, `is_head`, `is_active`) VALUES
-(1, '008dd5fb9270a1ead2c83e6044841bd9', 1, 1, 'MONY KID CLINIC', 'គ្លីនិកកុមារ មុនីឃីត', 'Office Phone: 023 866 060 <br/>Hand Phone: 012 246 219', '', '', '', '', 36, NULL, NULL, NULL, NULL, '# 15-17,Street  598, Sangkat Phnom Penh Thmey , Khan Russei Keo , Phnom Penh, Cambdia.', '# 15-17,Street  598, Sangkat Phnom Penh Thmey , Khan Russei Keo , Phnom Penh, Cambdia.', 1, 1, '07:00:00', '20:00:00', '2017-08-22 11:41:32', 1, '2019-05-08 15:24:29', 1, 1, 1, 1);
+(1, '008dd5fb9270a1ead2c83e6044841bd9', 1, 1, 'Sunshine Kids Clinic', 'គ្លីនិកកុមារ​ សាន់សាញ', 'Office Phone: 023 232 323', '', '', '', '', 36, NULL, NULL, NULL, NULL, '# 15-17,Street  598, Sangkat Phnom Penh Thmey , Khan Russei Keo , Phnom Penh, Cambdia.', '# 15-17,Street  598, Sangkat Phnom Penh Thmey , Khan Russei Keo , Phnom Penh, Cambdia.', 1, 1, '07:00:00', '20:00:00', '2017-08-22 11:41:32', 1, '2023-06-07 11:52:42', 1, 1, 1, 1);
 
 --
 -- Triggers `branches`
@@ -1864,7 +1864,7 @@ CREATE TABLE IF NOT EXISTS `companies` (
 --
 
 INSERT INTO `companies` (`id`, `sys_code`, `name`, `name_other`, `currency_center_id`, `vat_number`, `vat_calculate`, `website`, `photo`, `classes`, `description`, `created`, `created_by`, `modified`, `modified_by`, `is_active`) VALUES
-(1, 'e75a9336d36e2a42a6d3e1bb48a1daec', 'Mony Kid Clinic', 'គ្លីនិកកុមារ មុនីឃីត', 1, '', 2, '', 'b2b5dfccd2e29039be6f95eedccc6b04.png', 'a:1:{i:1;a:2:{i:1;s:1:"1";i:2;s:1:"1";}}', '', '2017-07-21 10:06:21', 1, '2023-02-21 13:23:57', 1, 1);
+(1, 'e75a9336d36e2a42a6d3e1bb48a1daec', 'Sunshine Kids Clinic', 'គ្លីនិកកុមារ​ សាន់សាញ', 1, 'K-0000000001', 1, '', 'b2b5dfccd2e29039be6f95eedccc6b04.png', 'a:1:{i:1;a:2:{i:1;s:1:"1";i:2;s:1:"1";}}', '', '2017-07-21 10:06:21', 1, '2023-06-07 11:53:07', 1, 1);
 
 --
 -- Triggers `companies`
@@ -2013,14 +2013,15 @@ CREATE TABLE IF NOT EXISTS `company_with_categories` (
   `company_category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `searchs` (`company_id`,`company_category_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `company_with_categories`
 --
 
 INSERT INTO `company_with_categories` (`id`, `company_id`, `company_category_id`) VALUES
-(38, 1, 14);
+(43, 1, 2),
+(44, 1, 14);
 
 --
 -- Triggers `company_with_categories`
@@ -4047,14 +4048,17 @@ CREATE TABLE IF NOT EXISTS `employees` (
   KEY `name` (`name`),
   KEY `employee_code` (`employee_code`),
   KEY `sys_code` (`sys_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `employees`
 --
 
 INSERT INTO `employees` (`id`, `sys_code`, `house_no`, `street_id`, `province_id`, `district_id`, `commune_id`, `village_id`, `photo`, `employee_code`, `name`, `name_kh`, `sex`, `dob`, `start_working_date`, `termination_date`, `personal_number`, `other_number`, `email`, `position_id`, `salary`, `work_for_vendor_id`, `note`, `created`, `created_by`, `modified`, `modified_by`, `is_show_in_sales`, `is_active`) VALUES
-(1, 'f31de57019360d843703bafd179755e4', '', NULL, NULL, NULL, NULL, NULL, '', 'EMP0000001', 'Sokleap', 'សុលាភ', 'Male', '1999-08-26', '0000-00-00', '0000-00-00', '', '', '', 1, NULL, 1, '', '2023-02-21 13:23:19', 1, '2023-02-21 13:26:15', 1, 0, 1);
+(1, 'a1faa6596cf7196ce7f72844fe317440', '', NULL, NULL, NULL, NULL, NULL, '', 'EMP0000001', 'Dr. Mony', 'ចាន់​ មូនី', 'Male', '1999-04-07', '0000-00-00', '0000-00-00', '010101010', '', '', 1, '1500.000', 1, '', '2023-06-07 11:58:38', 1, '2023-06-07 11:58:38', NULL, 0, 1),
+(2, '6b88e13d984b0abbb2039c5002f1ab8b', '', NULL, NULL, NULL, NULL, NULL, '', 'EMP0000002', 'Dr. Reaksmey', 'លី​ រស្មី', 'Female', '1992-05-14', '0000-00-00', '0000-00-00', '015151515', '', '', 1, '1500.000', 1, '', '2023-06-07 11:59:39', 1, '2023-06-07 12:16:52', 1, 0, 1),
+(3, 'fcef4df73cf534c6a2feacab31c614c3', '', NULL, NULL, NULL, NULL, NULL, '', 'EMP0000003', 'Danin', 'ឈុន ដានីន', 'Female', '2000-04-17', '0000-00-00', '0000-00-00', '010101010', '', '', 2, '500.000', 1, '', '2023-06-07 12:01:32', 1, '2023-06-07 12:07:05', 1, 0, 1),
+(4, '35fb46bc8c4ced910e9cbb115057a720', '', NULL, NULL, NULL, NULL, NULL, '', 'EMP0000004', 'Malina', 'វង់ ម៉ាលីណា', 'Female', '2005-04-23', '0000-00-00', '0000-00-00', '017171717', '', '', 2, NULL, 1, '', '2023-06-07 12:02:53', 1, '2023-06-07 12:02:53', NULL, 0, 1);
 
 --
 -- Triggers `employees`
@@ -4083,14 +4087,17 @@ CREATE TABLE IF NOT EXISTS `employee_companies` (
   PRIMARY KEY (`id`),
   KEY `employee_id` (`employee_id`),
   KEY `company_id` (`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `employee_companies`
 --
 
 INSERT INTO `employee_companies` (`id`, `employee_id`, `company_id`) VALUES
-(3, 1, 1);
+(1, 1, 1),
+(4, 4, 1),
+(7, 3, 1),
+(8, 2, 1);
 
 --
 -- Triggers `employee_companies`
@@ -4119,21 +4126,19 @@ CREATE TABLE IF NOT EXISTS `employee_egroups` (
   PRIMARY KEY (`id`),
   KEY `employee_id` (`employee_id`),
   KEY `egroup_id` (`egroup_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `employee_egroups`
 --
 
 INSERT INTO `employee_egroups` (`id`, `employee_id`, `egroup_id`) VALUES
-(5, 9, 3),
-(6, 10, 3),
-(8, 11, 4),
-(10, 12, 2),
-(11, 13, 2),
-(12, 2, 2),
-(13, 3, 2),
-(16, 1, 2);
+(1, 1, 2),
+(5, 4, 1),
+(6, 4, 3),
+(11, 3, 1),
+(12, 3, 3),
+(13, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -8130,14 +8135,14 @@ CREATE TABLE IF NOT EXISTS `module_code_branches` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `branch_id` (`branch_id`),
   KEY `company_id` (`branch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `module_code_branches`
 --
 
 INSERT INTO `module_code_branches` (`id`, `branch_id`, `adj_code`, `request_code`, `to_code`, `tr_code`, `pos_code`, `pos_rep_code`, `quote_code`, `so_code`, `inv_code`, `inv_rep_code`, `dn_code`, `receive_pay_code`, `cm_code`, `cm_rep_code`, `po_code`, `pb_code`, `pb_rep_code`, `br_code`, `br_rep_code`, `pay_bill_code`, `cus_consign_code`, `cus_consign_return_code`, `ven_consign_code`, `ven_consign_return_code`, `landed_cost_code`, `landed_cost_receipt_code`, `receive_collect_shift`) VALUES
-(34, 1, 'ADJ', NULL, 'TO', NULL, 'POS', 'POR', NULL, 'SO', 'INV', 'INVR', 'DN', 'RPC', 'CM', 'CRC', NULL, 'PB', 'PRC', 'BR', 'BRR', 'PAC', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(35, 1, 'ADJ', NULL, 'TO', NULL, 'POS', 'POR', NULL, 'SO', 'INV', 'INVR', 'DN', 'RPC', 'CM', 'CRC', NULL, 'PB', 'PRC', 'BR', 'BRR', 'PAC', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Triggers `module_code_branches`
@@ -10737,6 +10742,10 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `telephone` varchar(255) COLLATE utf8_unicode_ci DEFAULT '0',
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location_id` int(11) DEFAULT NULL,
+  `province_id` int(11) DEFAULT NULL,
+  `district_id` int(11) DEFAULT NULL,
+  `commune_id` int(11) DEFAULT NULL,
+  `village_id` int(11) DEFAULT NULL,
   `relation_patient` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `patient_id_card` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -10765,6 +10774,7 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `payment_every` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `photo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `referral_id` int(11) DEFAULT NULL,
+  `register_date` date DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
@@ -10772,7 +10782,15 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `is_active` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `patient_code` (`patient_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `patients`
+--
+
+INSERT INTO `patients` (`id`, `patient_code`, `patient_name`, `mother_name`, `father_name`, `sex`, `telephone`, `address`, `location_id`, `province_id`, `district_id`, `commune_id`, `village_id`, `relation_patient`, `patient_id_card`, `email`, `dob`, `place_of_birth`, `nationality`, `religion`, `patient_bill_type_id`, `company_insurance_id`, `insurance_note`, `occupation`, `father_occupation`, `mother_occupation`, `patient_fax_number`, `case_emergency_tel`, `case_emergency_name`, `allergic_medicine`, `allergic_food`, `allergic_medicine_note`, `allergic_food_note`, `unknown_allergic`, `patient_type_id`, `patient_group_id`, `patient_group`, `payment_term_id`, `payment_every`, `photo`, `referral_id`, `register_date`, `created`, `created_by`, `modified`, `modified_by`, `is_active`) VALUES
+(1, '23P0000001', 'Sen Meta', 'Chan Sreylin', 'Sen Dina', 'M', '012253621', '', NULL, 26, 9, 51, NULL, NULL, NULL, NULL, '2008-04-10', NULL, 36, '', NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, 0, 0, '', '', 1, 2, 1, 1, 1, NULL, NULL, 4, '2023-06-07', '2023-06-07 12:19:18', 1, '2023-06-07 15:26:12', NULL, 1),
+(2, '23P0000002', 'Roth Borin', 'Ny Linda', 'Try Roth', 'M', '015263985', '', NULL, 34, 81, 5, NULL, NULL, NULL, NULL, '2000-06-23', NULL, 36, '', NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, 1, 0, 'Sea food, Beer', '', 0, 2, 1, 1, 1, NULL, NULL, 6, '2023-06-07', '2023-06-07 14:04:01', 1, '2023-06-07 15:25:33', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -14137,7 +14155,15 @@ CREATE TABLE IF NOT EXISTS `queued_doctors` (
   PRIMARY KEY (`id`),
   KEY `patient_id` (`queue_id`),
   KEY `created_by` (`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `queued_doctors`
+--
+
+INSERT INTO `queued_doctors` (`id`, `queue_id`, `doctor_id`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
+(1, 1, 6, '2023-06-07 12:19:18', 1, '2023-06-07 12:19:18', NULL, 1),
+(2, 2, 2, '2023-06-07 14:04:01', 1, '2023-06-07 14:04:01', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -14158,7 +14184,15 @@ CREATE TABLE IF NOT EXISTS `queued_doctor_waitings` (
   PRIMARY KEY (`id`),
   KEY `patient_id` (`queue_id`),
   KEY `created_by` (`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `queued_doctor_waitings`
+--
+
+INSERT INTO `queued_doctor_waitings` (`id`, `queue_id`, `doctor_id`, `room_id`, `number_taken`, `created`, `created_by`, `modified`, `modified_by`) VALUES
+(1, 1, 6, NULL, 1, '2023-06-07 12:19:18', 1, '2023-06-07 12:19:18', NULL),
+(2, 2, 2, NULL, 1, '2023-06-07 14:04:01', 1, '2023-06-07 14:04:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -14217,7 +14251,15 @@ CREATE TABLE IF NOT EXISTS `queues` (
   `status` tinyint(4) DEFAULT '1' COMMENT '1 is active, 2 have action, 3 ready payment; 4 is void',
   PRIMARY KEY (`id`),
   KEY `patient_id` (`patient_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `queues`
+--
+
+INSERT INTO `queues` (`id`, `patient_id`, `patient_type_id`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
+(1, 1, 2, '2023-06-07 12:19:18', 1, '2023-06-07 12:19:18', NULL, 1),
+(2, 2, 2, '2023-06-07 14:04:01', 1, '2023-06-07 14:04:01', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -14523,16 +14565,19 @@ CREATE TABLE IF NOT EXISTS `referrals` (
   `modified_by` int(11) DEFAULT NULL,
   `is_active` tinyint(4) DEFAULT '1' COMMENT '1:active 2:edit 3:delete',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `referrals`
 --
 
 INSERT INTO `referrals` (`id`, `name`, `sex`, `telephone`, `address`, `email`, `dob`, `description`, `created`, `created_by`, `modified`, `modified_by`, `is_active`) VALUES
-(1, 'Iem soleap', 'M', '0968457611', NULL, NULL, '1999-03-26', NULL, '2023-03-01 17:36:30', 1, '2023-03-01 17:36:30', NULL, 1),
-(2, 'Sreyleap', 'M', '0968457611', NULL, NULL, '1963-01-01', NULL, '2023-03-22 17:51:48', 1, '2023-03-22 17:55:26', 1, 1),
-(3, 'Srey lin-edit', 'F', '09665582', NULL, NULL, '1958-01-01', NULL, '2023-03-02 16:15:11', 1, '2023-05-26 16:31:53', 1, 2);
+(1, 'Sok Syla', 'M', '012457896', NULL, NULL, '2004-04-16', NULL, '2023-06-07 12:10:42', 1, '2023-06-07 12:10:42', NULL, 1),
+(2, 'Prom Seyha', 'M', '0156321478', NULL, NULL, '2005-06-06', NULL, '2023-06-07 12:11:08', 1, '2023-06-07 12:11:08', NULL, 1),
+(3, 'Vong Malina', 'F', '077777777', NULL, NULL, '2000-06-06', NULL, '2023-06-07 12:12:02', 1, '2023-06-07 12:12:02', NULL, 1),
+(4, 'Kong Chanreaksmey', 'M', '0181236548', NULL, NULL, '2005-03-25', NULL, '2023-06-07 12:13:07', 1, '2023-06-07 12:13:07', NULL, 1),
+(5, 'Chin Kakada', 'M', '012141563', NULL, NULL, '2005-02-11', NULL, '2023-06-07 12:13:36', 1, '2023-06-07 12:13:36', NULL, 1),
+(6, 'Chin Socheat', 'M', '015232323', NULL, NULL, '2005-03-11', NULL, '2023-06-07 12:14:26', 1, '2023-06-07 12:14:26', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -15583,7 +15628,32 @@ CREATE TABLE IF NOT EXISTS `system_activities` (
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `key_search` (`module`,`act`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
+
+--
+-- Dumping data for table `system_activities`
+--
+
+INSERT INTO `system_activities` (`id`, `module`, `act`, `bug`, `browser`, `operating_system`, `ip`, `created`, `created_by`, `status`) VALUES
+(1, 'Employee', 'Delete', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:42:11', 1, 1),
+(2, 'Company', 'Add', '<pre class="cake-debug"><a href="javascript:void(0);" onclick="document.getElementById(''cakeErr1-trace'').style.display = (document.getElementById(''cakeErr1-trace'').style.display == ''none'' ? '''' : ''none'');"><b>Warning</b> (2)</a>: rename(public/company_photo/tmp/', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:48:35', 1, 2),
+(3, 'Company', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:48:51', 1, 1),
+(4, 'Branch', 'Edit', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:52:42', 1, 1),
+(5, 'Company', 'Add', '<pre class="cake-debug"><a href="javascript:void(0);" onclick="document.getElementById(''cakeErr1-trace'').style.display = (document.getElementById(''cakeErr1-trace'').style.display == ''none'' ? '''' : ''none'');"><b>Warning</b> (2)</a>: rename(public/company_photo/tmp/', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:53:07', 1, 2),
+(6, 'Employee', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:58:38', 1, 1),
+(7, 'Employee', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:59:39', 1, 1),
+(8, 'Employee', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:01:32', 1, 1),
+(9, 'Employee', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:02:54', 1, 1),
+(10, 'Employee', 'Edit', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:06:31', 1, 1),
+(11, 'Employee', 'Edit', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:06:47', 1, 1),
+(12, 'Employee', 'Edit', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:07:05', 1, 1),
+(13, 'Referral', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:10:43', 1, 1),
+(14, 'Referral', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:11:08', 1, 1),
+(15, 'Referral', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:12:03', 1, 1),
+(16, 'Referral', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:13:07', 1, 1),
+(17, 'Referral', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:13:36', 1, 1),
+(18, 'Referral', 'Add', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:14:26', 1, 1),
+(19, 'Employee', 'Edit', '', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:16:52', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -16290,12 +16360,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `sys_code`, `pin`, `main_project_id`, `project_id`, `user_code`, `session_id`, `session_start`, `session_active`, `session_lat`, `session_long`, `session_accuracy`, `login_attempt`, `login_attempt_remote_ip`, `login_attempt_http_user_agent`, `login_lat`, `login_long`, `login_accuracy`, `expired`, `duration`, `username`, `password`, `first_name`, `last_name`, `sex`, `dob`, `address`, `telephone`, `email`, `nationality`, `signature_photo`, `created`, `created_by`, `modified`, `modified_by`, `is_hash`, `is_sync`, `is_active`, `room_id`) VALUES
-(1, '1377e4a99f76f3a1f8f0bccb7ead773f', NULL, NULL, NULL, NULL, 'lheh6uurpflvktd4cgglg94ea0', '2023-06-03 15:46:30', '2023-06-03 15:50:50', '', '', '', NULL, '127.0.0.1', 'OS: Windows 10 Browser: Gecko based', NULL, NULL, NULL, '2025-08-10', 0, 'admin', '$2a$10$60uCVW6aKktXHMmtHDwV0OCWuQpzUNN24k/evF8uqhKbH6HCPWvn6', 'User', '1', 'Male', '1991-06-01', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2023-06-03 15:46:30', 1, 1, 0, 1, NULL),
-(2, '681c4141e7ade6f8762f6704b82261ef', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'doctor', '$2a$10$Cz3VfFbShyyTkHwpw5nxXOtOR1vfIuk5xSjDadFMPMSXx7B//lzVa', 'User', '2', 'Female', '1986-12-02', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2020-06-23 14:57:59', 1, 1, 0, 1, NULL),
-(3, '7e715ab811348175783b1b9f919c95bc', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'pharmacy', '$2a$10$GfdjH/SjOym.N1koBXJqtev7UYa9eRdClMLJ866vQPVO8yZlvpugW', 'User', '3', 'Female', '1993-09-05', 'Sleng Rolearng Vilage Khan Sen Sok Phnom Penh', '010 27 19 33', '', 36, NULL, '2017-02-17 09:33:11', 1, '2020-09-14 14:56:59', 5, 1, 0, 1, NULL),
-(4, '4d52eb718d0dc3a1ab65839ab8164f78', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'register', '$2a$10$vuUCdwwuD3elR6dXuSn2ye6Mj969KLI3p.3wvl4WjMWNaywp4wb8S', 'User', '4', 'Male', '0000-00-00', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2020-09-14 14:41:18', 1, 1, 0, 1, NULL),
-(5, 'ba19afbc2d4151997eb5232a5f659cef', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'Nurse F1', '$2a$10$8hX.DiTA5i00LLOwSZ5Q3e42xioDOHJLUiauiRgtQvtupWjTs8yS.', 'User', '5', 'Male', '0000-00-00', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2020-06-15 10:27:57', 14, 1, 0, 1, NULL),
-(6, '19b0df236d66ec5d3a872d53a1597ad0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'cashier', '$2a$10$zU3jvgyfcE44mnxrgVT.Je7bIt5bxqHz2xx0sVGNJ.h37TOpQCAbO', 'User', '6', 'Male', '2001-01-11', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2020-09-14 14:57:48', 1, 1, 0, 1, NULL),
+(1, '1377e4a99f76f3a1f8f0bccb7ead773f', NULL, NULL, NULL, NULL, 'dr78ut1drgg32jehj40iehhhq4', '2023-06-07 15:48:04', '2023-06-07 15:48:53', '', '', '', NULL, '127.0.0.1', 'OS: Windows 10 Browser: Gecko based', NULL, NULL, NULL, '2025-08-10', 0, 'admin', '$2a$10$60uCVW6aKktXHMmtHDwV0OCWuQpzUNN24k/evF8uqhKbH6HCPWvn6', 'admin', '', 'Male', '1991-06-01', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2023-06-07 15:48:04', 1, 1, 0, 1, NULL),
+(2, '681c4141e7ade6f8762f6704b82261ef', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'reaksmey', '$2a$10$ZU/pglnJUOurHRfey0ew2.XO45kaSkiJRalouT5v2MkUixPJP/TpW', 'Ly', 'Reaksmey', 'Female', '1986-12-02', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2023-06-07 12:05:12', 1, 1, 0, 1, NULL),
+(3, '7e715ab811348175783b1b9f919c95bc', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'pharmacy', '$2a$10$GfdjH/SjOym.N1koBXJqtev7UYa9eRdClMLJ866vQPVO8yZlvpugW', 'Chan', 'Mony', 'Female', '1993-09-05', 'Sleng Rolearng Vilage Khan Sen Sok Phnom Penh', '010 27 19 33', '', 36, NULL, '2017-02-17 09:33:11', 1, '2023-06-07 12:05:54', 1, 1, 0, 1, NULL),
+(4, '4d52eb718d0dc3a1ab65839ab8164f78', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'danin', '$2a$10$irCuzGxh6No9SNw8U4JQ8e7/hUppmpksvHM4LQPoq1bEHmj12ASwy', 'Chhun ', 'Danin', 'Female', '2005-03-08', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2023-06-07 12:08:30', 1, 1, 0, 1, NULL),
+(5, 'ba19afbc2d4151997eb5232a5f659cef', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'malina', '$2a$10$CX5L1X6I3NAYEp9TfS2gLefiLfD5or6b/LeDpuJCqj2a6v3OerUji', 'Vong', 'Malina', 'Female', '2000-06-13', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2023-06-07 12:10:06', 1, 1, 0, 1, NULL),
+(6, '19b0df236d66ec5d3a872d53a1597ad0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'mony', '$2a$10$Qb2yTK5aJDhSdnvTw2gB5.P3QrR13e03bxYbGxby9yTsQOBDoTKtm', 'Chan', 'Mony', 'Male', '2001-01-11', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2023-06-07 12:16:09', 1, 1, 0, 1, NULL),
 (7, '23a089f85d3ecd7e749e80a1c646b99e', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'nurse', '$2a$10$NWy.j.mTmjI37B7h3BAI2.FdHd0ottWWzPck/rZiVfoHsJI0.0klq', 'User', '7', 'Female', '1997-01-01', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2020-09-14 14:42:04', 2, 1, 0, 1, NULL),
 (8, '1cccbb1ee146cc078f9c260c4996bc23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'adminlabo', '$2a$10$FLVGynDXdARCLVBlcjLKie.uisO.OhJJZpxlS5K3y9m.EIy35Y1Zy', 'User', '8', 'Male', '0000-00-00', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2022-12-15 18:11:38', 1, 1, 0, 1, NULL),
 (9, '6f8f9d5ee780cded31be5387748a3381', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, '2025-08-10', 0, 'doctor7', '$2a$10$k3MFuNKlFjMn/FgEGhbA4OOMvBtmg1vKNj6lfBrvVOUijv7QpN2g6', 'User', '9', 'Male', '2000-03-01', '', '', '', 36, NULL, '2017-02-17 09:33:11', 1, '2020-06-24 10:19:46', 11, 1, 0, 1, NULL),
@@ -16335,7 +16405,81 @@ CREATE TABLE IF NOT EXISTS `user_activity_logs` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `key_search` (`type`,`tbl_from_id`,`tbl_to_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=69 ;
+
+--
+-- Dumping data for table `user_activity_logs`
+--
+
+INSERT INTO `user_activity_logs` (`id`, `user_id`, `type`, `tbl_from_id`, `tbl_to_id`, `action`, `browser`, `operating_system`, `ip`, `created`) VALUES
+(1, 1, 'Login', 1, 0, 'Login', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:27:03'),
+(2, 1, 'Referral', 0, 0, 'Dashboard', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:39:59'),
+(3, 1, 'User', 2, 0, 'LogOut', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:41:10'),
+(4, 1, 'Login', 3, 0, 'Login', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:41:16'),
+(5, 1, 'Employee', 0, 0, 'Dashboard', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:41:57'),
+(6, 1, 'Employee', 1, 0, 'Delete', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:42:11'),
+(7, 1, 'Employee', 0, 0, 'Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:42:13'),
+(8, 1, 'Employee', 0, 0, 'Dashboard', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:43:48'),
+(9, 1, 'Employee', 0, 0, 'Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:43:48'),
+(10, 1, 'Company', 0, 0, 'Dashborad', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:45:46'),
+(11, 1, 'Company', 1, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:45:48'),
+(12, 1, 'Company', 1, 0, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:48:35'),
+(13, 1, 'Company', 1, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:48:44'),
+(14, 1, 'Company', 1, 0, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:48:50'),
+(15, 1, 'Branch', 0, 0, 'Dashboard', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:49:05'),
+(16, 1, 'Branch', 1, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:51:02'),
+(17, 1, 'Company', 1, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:51:15'),
+(18, 1, 'Company', 1, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:52:06'),
+(19, 1, 'Branch', 1, 0, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:52:42'),
+(20, 1, 'Company', 1, 0, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:53:07'),
+(21, 1, 'Employee', 0, 0, 'Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:53:49'),
+(22, 1, 'Login', 4, 0, 'Login', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:56:53'),
+(23, 1, 'Employee', 0, 0, 'Dashboard', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:57:26'),
+(24, 1, 'Employee', 0, 0, 'Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:57:27'),
+(25, 1, 'Employee', 1, 0, 'Save Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:58:38'),
+(26, 1, 'Employee', 0, 0, 'Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:58:40'),
+(27, 1, 'Employee', 2, 0, 'Save Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:59:39'),
+(28, 1, 'Employee', 0, 0, 'Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 11:59:41'),
+(29, 1, 'Employee', 3, 0, 'Save Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:01:32'),
+(30, 1, 'Employee', 0, 0, 'Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:01:34'),
+(31, 1, 'Employee', 4, 0, 'Save Add New', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:02:53'),
+(32, 1, 'User', 2, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:03:52'),
+(33, 1, 'User', 2, 2, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:04:25'),
+(34, 1, 'User', 2, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:04:32'),
+(35, 1, 'User', 2, 2, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:04:48'),
+(36, 1, 'User', 2, 0, 'Edit Profile', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:04:53'),
+(37, 1, 'User', 2, 0, 'Save Edit Profile', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:05:12'),
+(38, 1, 'User', 3, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:05:20'),
+(39, 1, 'User', 3, 3, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:05:54'),
+(40, 1, 'User', 4, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:06:02'),
+(41, 1, 'Employee', 3, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:06:23'),
+(42, 1, 'Employee', 3, 0, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:06:31'),
+(43, 1, 'Employee', 3, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:06:35'),
+(44, 1, 'Employee', 3, 0, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:06:46'),
+(45, 1, 'Employee', 3, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:06:50'),
+(46, 1, 'Employee', 3, 0, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:07:05'),
+(47, 1, 'Employee', 3, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:07:13'),
+(48, 1, 'User', 4, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:07:24'),
+(49, 1, 'User', 4, 4, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:08:04'),
+(50, 1, 'User', 4, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:08:08'),
+(51, 1, 'User', 4, 0, 'Edit Profile', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:08:14'),
+(52, 1, 'User', 4, 0, 'Save Edit Profile', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:08:30'),
+(53, 1, 'User', 5, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:08:37'),
+(54, 1, 'User', 5, 5, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:09:39'),
+(55, 1, 'User', 5, 0, 'Edit Profile', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:09:48'),
+(56, 1, 'User', 5, 0, 'Save Edit Profile', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:10:06'),
+(57, 1, 'Referral', 0, 0, 'Dashboard', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:10:19'),
+(58, 1, 'User', 6, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:14:49'),
+(59, 1, 'User', 6, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:15:00'),
+(60, 1, 'User', 6, 6, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:15:13'),
+(61, 1, 'User', 6, 0, 'Edit Profile', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:15:46'),
+(62, 1, 'User', 6, 0, 'Save Edit Profile', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:16:09'),
+(63, 1, 'Employee', 0, 0, 'Dashboard', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:16:44'),
+(64, 1, 'Employee', 2, 0, 'Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:16:48'),
+(65, 1, 'Employee', 2, 0, 'Save Edit', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 12:16:52'),
+(66, 1, 'Referral', 0, 0, 'Dashboard', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 15:47:41'),
+(67, 1, 'User', 5, 0, 'LogOut', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 15:47:57'),
+(68, 1, 'Login', 6, 0, 'Login', 'Gecko based', 'Windows 10', '127.0.0.1', '2023-06-07 15:48:04');
 
 -- --------------------------------------------------------
 
@@ -16349,23 +16493,23 @@ CREATE TABLE IF NOT EXISTS `user_branches` (
   `branch_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id_branch_id` (`user_id`,`branch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=320 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=336 ;
 
 --
 -- Dumping data for table `user_branches`
 --
 
 INSERT INTO `user_branches` (`id`, `user_id`, `branch_id`) VALUES
-(319, 1, 1),
-(316, 2, 1),
-(307, 3, 1),
-(318, 4, 1),
-(301, 5, 1),
-(302, 6, 1),
-(313, 7, 1),
-(304, 8, 1),
-(305, 9, 1),
-(306, 10, 1);
+(320, 1, 1),
+(331, 2, 1),
+(332, 3, 1),
+(333, 4, 1),
+(334, 5, 1),
+(335, 6, 1),
+(326, 7, 1),
+(327, 8, 1),
+(328, 9, 1),
+(329, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -16393,23 +16537,23 @@ CREATE TABLE IF NOT EXISTS `user_companies` (
   `company_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id_company_id` (`user_id`,`company_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=333 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=369 ;
 
 --
 -- Dumping data for table `user_companies`
 --
 
 INSERT INTO `user_companies` (`id`, `user_id`, `company_id`) VALUES
-(323, 1, 1),
-(324, 2, 1),
-(325, 3, 1),
-(326, 4, 1),
-(327, 5, 1),
-(328, 6, 1),
-(329, 7, 1),
-(330, 8, 1),
-(331, 9, 1),
-(332, 10, 1);
+(353, 1, 1),
+(364, 2, 1),
+(365, 3, 1),
+(366, 4, 1),
+(367, 5, 1),
+(368, 6, 1),
+(359, 7, 1),
+(360, 8, 1),
+(361, 9, 1),
+(362, 10, 1);
 
 --
 -- Triggers `user_companies`
@@ -16730,14 +16874,18 @@ CREATE TABLE IF NOT EXISTS `user_employees` (
   `user_id` bigint(20) NOT NULL,
   `employee_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `user_employees`
 --
 
 INSERT INTO `user_employees` (`id`, `user_id`, `employee_id`) VALUES
-(1, 1, 1);
+(2, 2, 2),
+(3, 3, 1),
+(4, 4, 3),
+(5, 5, 4),
+(6, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -16751,7 +16899,7 @@ CREATE TABLE IF NOT EXISTS `user_groups` (
   `group_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id_group_id` (`user_id`,`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=202 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=215 ;
 
 --
 -- Dumping data for table `user_groups`
@@ -16760,11 +16908,20 @@ CREATE TABLE IF NOT EXISTS `user_groups` (
 INSERT INTO `user_groups` (`id`, `user_id`, `group_id`) VALUES
 (192, 1, 1),
 (11, 1, 2),
-(193, 2, 1),
+(203, 2, 2),
+(202, 2, 4),
 (194, 3, 1),
-(195, 4, 1),
-(196, 5, 1),
-(197, 6, 1),
+(206, 4, 4),
+(207, 4, 5),
+(204, 4, 7),
+(205, 4, 8),
+(210, 5, 4),
+(211, 5, 5),
+(208, 5, 7),
+(209, 5, 8),
+(214, 6, 2),
+(212, 6, 7),
+(213, 6, 8),
 (198, 7, 1),
 (199, 8, 1),
 (200, 9, 1),
@@ -16835,7 +16992,7 @@ CREATE TABLE IF NOT EXISTS `user_location_groups` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `location_group_id` (`location_group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=73 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=85 ;
 
 --
 -- Dumping data for table `user_location_groups`
@@ -16844,24 +17001,24 @@ CREATE TABLE IF NOT EXISTS `user_location_groups` (
 INSERT INTO `user_location_groups` (`id`, `user_id`, `location_group_id`) VALUES
 (35, 9, 1),
 (36, 8, 1),
-(38, 6, 1),
-(43, 2, 2),
 (44, 10, 1),
-(45, 3, 1),
-(49, 6, 2),
 (51, 8, 2),
 (52, 9, 2),
 (53, 10, 2),
-(54, 3, 2),
-(56, 4, 2),
-(57, 5, 1),
-(58, 5, 2),
 (63, 7, 2),
 (65, 7, 1),
-(68, 2, 1),
-(70, 4, 1),
 (71, 1, 2),
-(72, 1, 1);
+(72, 1, 1),
+(75, 2, 2),
+(76, 2, 1),
+(77, 3, 1),
+(78, 3, 2),
+(79, 4, 2),
+(80, 4, 1),
+(81, 5, 1),
+(82, 5, 2),
+(83, 6, 1),
+(84, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -16878,7 +17035,19 @@ CREATE TABLE IF NOT EXISTS `user_logs` (
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `user_logs`
+--
+
+INSERT INTO `user_logs` (`id`, `user_id`, `type`, `http_user_agent`, `remote_addr`, `created`) VALUES
+(1, 1, 'Login', 'OS: Windows 10 Browser: Gecko based', '127.0.0.1', '2023-06-07 11:27:03'),
+(2, 1, 'LogOut', 'OS: Windows 10 Browser: Gecko based', '127.0.0.1', '2023-06-07 11:41:10'),
+(3, 1, 'Login', 'OS: Windows 10 Browser: Gecko based', '127.0.0.1', '2023-06-07 11:41:16'),
+(4, 1, 'Login', 'OS: Windows 10 Browser: Gecko based', '127.0.0.1', '2023-06-07 11:56:53'),
+(5, 1, 'LogOut', 'OS: Windows 10 Browser: Gecko based', '127.0.0.1', '2023-06-07 15:47:57'),
+(6, 1, 'Login', 'OS: Windows 10 Browser: Gecko based', '127.0.0.1', '2023-06-07 15:48:04');
 
 -- --------------------------------------------------------
 
